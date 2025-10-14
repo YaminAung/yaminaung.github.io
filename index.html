@@ -41,6 +41,7 @@
       .profile-image-wrapper {
         text-align: center;
         margin-bottom: 30px;
+        position: relative;
       }
 
       .profile-image {
@@ -87,7 +88,6 @@
       .contact-info a {
         color: #333;
         text-decoration: none;
-        word-break: break-all; /* Helps with long links on mobile */
       }
 
       .contact-info a:hover {
@@ -185,43 +185,46 @@
         margin-bottom: 5px;
       }
 
-      /* --- Mobile Responsive Styles --- */
-      @media (max-width: 768px) {
+      /* --- Mobile View: move header below profile image --- */
+      @media screen and (max-width: 768px) {
         .container {
-          flex-direction: column; /* Stack columns vertically */
-          margin: 0;
-          width: 100%;
-          box-shadow: none;
+          flex-direction: column;
         }
 
-        .sidebar,
         .main-content {
-          width: 100%; /* Make each column take full width */
+          width: 100%;
         }
 
         .sidebar {
-          padding: 25px;
+          width: 100%;
+          padding: 20px;
         }
 
-        .header {
-          padding: 30px 25px;
+        /* Hide original header in main-content */
+        .main-content > .header {
+          display: none;
+        }
+
+        /* Show mobile header below profile image */
+        .mobile-header {
+          display: block;
+          background-color: #009688;
+          color: #fff;
+          padding: 20px;
+          margin-top: 20px;
           text-align: center;
         }
 
-        .header h1 {
-          font-size: 38px;
+        .profile-image {
+          width: 120px;
+          height: 120px;
         }
+      }
 
-        .header p {
-          font-size: 18px;
-        }
-
-        .main-section {
-          padding: 25px;
-        }
-
-        .main-section h2 {
-          font-size: 20px;
+      /* Desktop: hide mobile duplicate */
+      @media screen and (min-width: 769px) {
+        .mobile-header {
+          display: none;
         }
       }
     </style>
@@ -235,6 +238,12 @@
             alt="Profile Picture"
             class="profile-image"
           />
+
+          <!-- Mobile-only header -->
+          <header class="header mobile-header">
+            <h1>Yamin Aung</h1>
+            <p>Scrum Master (Project Management)</p>
+          </header>
         </div>
 
         <section class="sidebar-section contact-info">
@@ -301,6 +310,7 @@
       </aside>
 
       <main class="main-content">
+        <!-- Original header for desktop -->
         <header class="header">
           <h1>Yamin Aung</h1>
           <p>Scrum Master (Project Management)</p>
